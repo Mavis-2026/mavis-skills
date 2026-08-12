@@ -203,6 +203,16 @@ def main():
     for p in paths:
         print(f"  - {p}")
 
+    # 8-12 用户规则: 沙箱只存半个月报告, 半个月前自动删
+    try:
+        from cleanup_old_reports import cleanup_old_reports
+        print(f"\n🧹 自动清理 15 天前报告...")
+        cleanup_old_reports()
+    except ImportError:
+        print("  ⚠️ cleanup_old_reports 模块未找到, 跳过清理")
+    except Exception as e:
+        print(f"  ⚠️ 清理失败: {e}")
+
 
 if __name__ == "__main__":
     main()
